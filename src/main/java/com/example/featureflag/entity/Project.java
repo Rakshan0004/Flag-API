@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "projects")
@@ -28,4 +30,8 @@ public class Project {
 
     @Column(name = "updated_at", insertable = false, updatable = false)
     private ZonedDateTime updatedAt;
+
+    // A Project has many Flags
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Flag> flags = new ArrayList<>();
 }
